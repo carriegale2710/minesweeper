@@ -85,6 +85,7 @@ public class Game {
     // Render the display grid to console
     public void renderDisplayGrid() {
         System.out.println("Display Grid:");
+        //todo - should also add some grid lines and coordinate labels on axis too
         for (int row = 0; row < displayGrid.length; row++) {
             for (int column = 0; column < displayGrid[0].length; column++) {
                 if (displayGrid[row][column] == -2) {
@@ -114,11 +115,12 @@ public class Game {
         int column = scan.nextInt();
         scan.close();
         
-        //separate this logic out??
+        //separate this logic out?? - lose game 
         if (hiddenGrid[row][column] == -1) {
             displayGrid[row][column] = -1;
             renderDisplayGrid();
             System.out.println("boom - you stepped on a mine :(");
+            //TODO - (bonus) reveal all the squares/mines after
         } else {
             displayGrid[row][column] = hiddenGrid[row][column];
             renderDisplayGrid();
@@ -143,4 +145,7 @@ public class Game {
     
     
 
+
 }
+
+
