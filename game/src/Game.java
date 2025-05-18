@@ -49,11 +49,44 @@ public class Game {
             }
         }
 
-        // Fill displayGrid with -2 (unrevealed)
+        // clears previous game grid
         for (int[] rowArr : displayGrid) Arrays.fill(rowArr, -2);
     }
 
-    // Render the hidden grid to console
+    // player move and lose condition
+    public void playerMove() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter row (0-2): ");
+        int row = scanner.nextInt();
+        System.out.print("Enter column (0-2): ");
+        int column = scanner.nextInt();
+
+        if (hiddenGrid[row][column] == -1) {
+            displayGrid[row][column] = -1;
+            renderDisplayGrid();
+            System.out.println("boom - you stepped on a mine :(");
+        } else {
+            displayGrid[row][column] = hiddenGrid[row][column];
+            renderDisplayGrid();
+            System.out.println("safe - no mines");
+            if (checkWin()) {
+                System.out.println("Congratulations! You revealed all safe squares. You win!");
+            }
+        }
+    }
+
+    public boolean checkWin() {
+        for (int row = 0; row < hiddenGrid.length; row++) {
+            for (int column = 0; column < hiddenGrid[0].length; column++) {
+                if (hiddenGrid[row][column] != -1 && displayGrid[row][column] == -2) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // ender the hidden grid
     public void renderHiddenGrid() {
         System.out.println("Hidden Grid:");
         for (int row = 0; row < hiddenGrid.length; row++) {
