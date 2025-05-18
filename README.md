@@ -24,10 +24,11 @@ Recreate a simplified version of the game Minesweeper to be played in the java c
 
 # Game Logic / Flow
 
-- Link to diagram: https://whimsical.com/5Wn2mbHadbV3jbStGr1Ub4
+- Link to diagram: https://whimsical.com/minesweeper-5Wn2mbHadbV3jbStGr1Ub4
 
-![flowchart1](flowchart.png)
-![flowchart2](image.png)
+![flowchart1](flowchart1.png)
+![flowchart2](flowchart2.png)
+![flowchart2.2](flowchart2.2.png)
 
 ## Phase 1: Game Loads onto Console for first time.
 

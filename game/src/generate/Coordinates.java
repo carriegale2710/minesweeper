@@ -1,7 +1,8 @@
-package mines;
-public class MineMap {
+package generate;
 
-    // Use for minesweeper coordinates?
+public class Coordinates {
+
+        // Use for minesweeper coordinates?
 
     public static int getRandomInt() {
         double randomDouble = Math.random()*3;
@@ -20,11 +21,4 @@ public class MineMap {
         System.out.println(randomCoordinate);
         return randomCoordinate;
     }
-
-    public char[] main() {
-        char[] firstMine = getRandomCoordinate();
-        System.out.println(firstMine);
-        return firstMine;
-    }
-
 }
