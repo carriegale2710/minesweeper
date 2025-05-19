@@ -1,8 +1,9 @@
-package generate;
+//reates and manages the game grid
+package generateboard
 
-public class Coordinates {
-
-        // Use for minesweeper coordinates?
+public class Grid {
+    
+          // Use for minesweeper coordinates?
 
     public static int getRandomInt() {
         double randomDouble = Math.random()*3;

@@ -2,13 +2,13 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game {
+public class MineSweeper {
 
     public int[][] displayGrid = new int[3][3]; //what user sees
     public int[][] hiddenGrid = new int[3][3]; //hidden info - map of mines/nums underneath
 
     public static void main(String[] args) throws Exception {
-        Game game = new Game();
+        MineSweeper game = new MineSweeper();
 
         //setting up new game
         game.setupGrids();

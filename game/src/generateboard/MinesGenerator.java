@@ -1,5 +1,6 @@
+//randomgenerateboard mines
 package generate;
-public class Mines {
+public class MinesGenerator {
 
 
 
