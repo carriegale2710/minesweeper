@@ -1,5 +1,5 @@
 //calculates adjacent mine counts
-package generateboard;
+package board;
 
 public class NumbersCalculator {
 
