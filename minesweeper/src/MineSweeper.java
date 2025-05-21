@@ -1,4 +1,4 @@
-import currentBoard.*;
+import board.*;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -8,27 +8,32 @@ import java.util.Scanner;
 
 public class MineSweeper {
 
+    //SECTION - current game being played
     
     public static void main(String[] args) throws Exception {
-        MineSweeper currentGame = new MineSweeper();
         
+        //create new game object
+        MineSweeper currentGame = new MineSweeper();
+
+        //create new board object for setup/updating the board at each turn
         Board currentBoard = new Board();
-        DisplayGrid display = new DisplayGrid();
+        
+        //board setup: create empty grids to fill later
+        int[][] displayGrid = new int[3][3]; //visible info - what user sees - updates on each player move
+        int[][] hiddenGrid = new int[3][3]; //hidden info - map of mines/nums underneath - does not change -setup up at beginning of game
+    
 
         //setting up new game
-        Board.setupGrids(currentBoard); // pass Board to setup
-        display.renderHiddenGrid(currentBoard); // pass Board to render
-        display.renderDisplayGrid(currentBoard);
+        currentBoard.setupGrids(currentBoard.displayGrid, currentBoard.hiddenGrid); // pass Board to setup
+        currentBoard.renderHiddenGrid(currentBoard.hiddenGrid); // pass Board to render
+        currentBoard.renderDisplayGrid(currentBoard.displayGrid);
 
         // pass Board to player move logic, etc.
 
         playerMove(currentBoard); // TODO: make this a loop for multiple turns
     }
 
-    //TODO - move these methods to separate classes to bvrek up code
 
-    //SECTION new game setup
-    //SECTION - rendering the UI //TODO - move to render package
 
     
 
@@ -38,29 +43,29 @@ public class MineSweeper {
         
         // TODO: add input validation - out of bounds, NaN, too many inputs etc.
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter row (0-2): ");
+        System.out.print("Enter row: ");
         int row = scan.nextInt();
-        System.out.print("Enter column (0-2): ");
+        System.out.print("Enter column: ");
         int column = scan.nextInt();
         scan.close();
         
         //separate this logic out?? - lose game 
         if (currentBoard.hiddenGrid[row][column] == -1) {
             currentBoard.displayGrid[row][column] = -1;
-            renderDisplayGrid();
+            currentBoard.renderDisplayGrid(currentBoard.displayGrid);
             System.out.println("boom - you stepped on a mine :(");
             //TODO - (bonus) reveal all the squares/mines after
         } else {
             currentBoard.displayGrid[row][column] = currentBoard.hiddenGrid[row][column];
-            renderDisplayGrid();
+            currentBoard.renderDisplayGrid(currentBoard.displayGrid);
             System.out.println("safe - no mines");
-            if (checkWin()) {
+            if (checkWin(currentBoard)) {
                 System.out.println("congrats you win!");
             }
         }
     }
 
-        //if no non-mines remaining - user wins
+    //if no non-mines remaining - user wins
     static boolean checkWin(Board currentBoard) {
         for (int row = 0; row < currentBoard.hiddenGrid.length; row++) {
             for (int column = 0; column < currentBoard.hiddenGrid[0].length; column++) {

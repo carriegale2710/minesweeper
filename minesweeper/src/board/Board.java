@@ -3,16 +3,16 @@ package board;
 import java.util.Arrays;
 import java.util.Random;
 
-//creates and manages the game grid
+//encapsulates board logic
+//creates and manages the game grids
+//provides methods for board setup
+//renders the grids for display on console
 
 public class Board {
 
+    //SECTION new game setup
 
-
-    int[][] displayGrid = new int[3][3]; //what user sees
-    int[][] hiddenGrid = new int[3][3]; //hidden info - map of mines/nums underneath
-    
-    public static void setupGrids(int[][] displayGrid, int[][] hiddenGrid) {
+    public void setupGrids(int[][] displayGrid, int[][] hiddenGrid) {
         
         // clears previous game grid
         for (int[] rowArr : displayGrid) Arrays.fill(rowArr, -2);
@@ -55,6 +55,7 @@ public class Board {
 
     }
 
+    //SECTION - rendering the UI 
     
     // render the hidden grid
     public void renderHiddenGrid(int[][] hiddenGrid) {
