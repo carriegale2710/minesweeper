@@ -7,11 +7,11 @@
 Recreate a simplified version of the game Minesweeper to be played in the java console:
 
 - [ ] The game should be able to randomly generate 10 mines in a 10x10 grid - (3x3 done)
-- [x] The user will be able to enter a command that represents a coordinate to check a location for a mine
-- [x] The application will display a number from 0-8 depending on how many mines surround that location - needs error handling
-- [x] If the user selects a mine, the game will respond "boom!" and the game will be lost
+- [] The user will be able to enter a command that represents a coordinate to check a location for a mine
+- [] The application will display a number from 0-8 depending on how many mines surround that location - needs error handling
+- [] If the user selects a mine, the game will respond "boom!" and the game will be lost
 - [ ] If every non-mine square has been revealed, the game is won -testing
-- [x] Render the grid to the console after every user command
+- [] Render the grid to the console after every user command
 
 ## Bonuses (optional)
 
@@ -27,8 +27,6 @@ Recreate a simplified version of the game Minesweeper to be played in the java c
 - Link to diagram: https://whimsical.com/minesweeper-5Wn2mbHadbV3jbStGr1Ub4
 
 ![flowchart1](flowchart1.png)
-![flowchart2](flowchart2.png)
-![flowchart2.2](flowchart2.2.png)
 
 ## Phase 1: Game Loads onto Console for first time.
 
@@ -97,68 +95,59 @@ GENERATE + RENDER DISPLAYED MAP LAYER
 
 3. End of Player Turn, continue to next turn -> go to 1.
 
-# Arrays/mapping - in progress
+# Modularisation Approach
 
-## Visible Map Array
+Why Modularize?
 
----
+- Separation of Concerns – Each package has a clear responsibility.
+- Scalability – Makes it easier to add new features later.
+- Maintainability – Easier debugging and refactoring.
 
-|     | [0] | [1] | [2] |
-| --- | --- | --- | --- |
-| A = | ?   | ?   | ?   |
-| --- | --- | --- | --- |
-| B = | ?   | ?   | ?   |
-| --- | --- | --- | --- |
-| C = | ?   | ?   | ?   |
+## MVC Naming convention
 
----
+MVC is used to split the code into three parts:
 
-- Render condition
-  - if revealed? adjacentMinesNum : "?";
+1. Model (data)
 
-## Hidden Map Array
+- array values, mine placement, board generation
+- model package -> GameBoard class
 
----
+2. View (display)
 
-|     | [0] | [1] | [2] |
-| --- | --- | --- | --- |
-| A = | -1  | 2   | 1   |
-| --- | --- | --- | --- |
-| B = | 2   | -1  | 1   |
-| --- | --- | --- | --- |
-| C = | 1   | 1   | -1  |
+- anything the player can see on the console
+- view package -> BoardDisplay class
 
----
+3. Controller (logic and input)
 
-## KEY:
+- game input, game flow/state, moves, win/lose conditions, game loop
+- controller package -> GameController class
 
-- if value = -1, it has a mine
-- if value 0/1/2, refers to no. adjacent mines around this tile
-- Values located at array[index] coordinates
-  - (order doesn't matter?)
-    - if letter = y-axis
-    - else if number = x-axis
+### Purpose/Benefits of MVC pattern:
 
-# How will I store data?
+MVC was designed to help organize code for graphical user interfaces by separating data (Model), user interface (View), and user input/logic (Controller). This separation makes programs easier to maintain and extend.
 
-- Arrays? ArrayLists? hashmaps? hashsets? 2D arrays?
+Overall benefit:
 
-Use ArrayLists to have mutable no. of elements in arrays. - good for controlled size of grid on render for new game. but not for values
+- Easier to maintain: You can change how the game looks (View) without changing the game logic (Model/Controller).
 
-- new ArrayList[n] (n=number of rows/columns to generate)
+## Modularisation map
 
-Use hashmaps to hold coordinate:value pairs? - good if you need booleans, but for later complexity.
+1. GameBoard class (`model` package)
 
-- `HashMap<String,Integer>`
+   - Holds the grids (hiddenGrid, displayGrid)
+   - Handles grid setup (placing mines, calculating numbers)
+   - Provides getters/setters for grids
 
----
+2. BoardDisplay class (`view` package)
 
-//minesweeper.. hashmap for each coodinate? or hashset?
+   - Handles rendering grids to the console
+   - Methods like renderDisplayGrid(GameBoard board) and renderHiddenGrid(GameBoard board)
 
-// (0,0) : hasBomb=true;
+3. GameController class (`controller` package)
 
-// (0,0) : null //nobomb?
+   - Handles player moves, win/lose checks, and game loop
+   - Methods like playerMove(GameBoard board), checkWin(GameBoard board)
 
-// "A1" : hasMine=false/true, adjacentMines= 0-8 , isNextTo = {A2,B2}
-
-//(can update them with the randomiser?)
+4. MinesweeperApp class (main class)
+   - Creates objects for GameBoard, BoardPrinter, and GameController
+   - Runs the main game loop, coordinates everything
