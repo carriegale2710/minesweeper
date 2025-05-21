@@ -132,22 +132,67 @@ Overall benefit:
 
 ## Modularisation map
 
-1. GameBoard class (`model` package)
+### 1. MinesweeperApp class (main class)
 
-   - Holds the grids (hiddenGrid, displayGrid)
-   - Handles grid setup (placing mines, calculating numbers)
-   - Provides getters/setters for grids
+THIS CLASS SHOULD:
 
-2. BoardDisplay class (`view` package)
+- Handling game startup and shutdown.
+- Starting and managing the main game loop and game flow.
+- Creates object instances for GameBoard, BoardPrinter, and GameController
+- Passing control between the controller, model, and view as needed.
+- Read user input commands -> pass them to controller
 
-   - Handles rendering grids to the console
-   - Methods like renderDisplayGrid(GameBoard board) and renderHiddenGrid(GameBoard board)
+IT SHOULD NOT:
 
-3. GameController class (`controller` package)
+- contain any game logic, board setup, or rendering
 
-   - Handles player moves, win/lose checks, and game loop
-   - Methods like playerMove(GameBoard board), checkWin(GameBoard board)
+What are the other classes for?
 
-4. MinesweeperApp class (main class)
-   - Creates objects for GameBoard, BoardPrinter, and GameController
-   - Runs the main game loop, coordinates everything
+1. controller/GameController - game logic/rules
+2. model/GameBoard -> game data/grid info
+3. view/BoardDisplay -> game display/rendering to console
+
+### 2. GameBoard class (`model` package)
+
+THIS CLASS SHOULD:
+
+- mainly handle inital board setup and updating its state only
+- Holds the grid data/values in array (hiddenGrid, displayGrid)
+- Handles grid setup (placing mines, calculating numbers)
+- Provides getters/setters for grids - updates the board
+
+IT SHOULD NOT:
+
+- Handle user input/output or interact with user (view)
+- contain any game logic/rules (controller)
+- decide when the game starts/ends or other game flow ()
+
+### 3. BoardDisplay class (`view` package)
+
+THIS CLASS SHOULD:
+
+- only display information on the console
+- render grids and text
+- re-render on each player turn
+
+IT SHOULD NOT:
+
+- Contain any game logic
+- modify the board data
+- handle user input
+- set up/initalise the board (model)
+
+### 4. GameController class (`controller` package)
+
+IT SHOULD:
+
+- Processes player moves/commands,
+- Checks win/lose conditions - determines result of each move
+- main game logic goes here
+- Methods like playerMove(GameBoard board), checkWin(GameBoard board)
+
+IT SHOULD NOT:
+
+- directly handle any user input/output (view)
+- directly manage board's internal data structures (model)
+- contain any board setup logic (model)

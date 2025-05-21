@@ -1,4 +1,4 @@
-/*SECTION 2. BoardDisplay class (`view` package)
+/*SECTION 3. BoardDisplay class (`view` package)
 
     THIS CLASS SHOULD:
     - only display information on the console

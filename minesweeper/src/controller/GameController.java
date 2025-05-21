@@ -1,4 +1,4 @@
-/*SECTION 3. GameController class (`controller` package)
+/*SECTION 4. GameController class (`controller` package)
 
   IT SHOULD:
    - Processes player moves/commands, 

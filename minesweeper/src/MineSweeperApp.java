@@ -1,4 +1,4 @@
-/*SECTION 4. MinesweeperApp class (main class)
+/*SECTION 1. MinesweeperApp class (main class)
 
   THIS CLASS SHOULD:
   - Handling game startup and shutdown.
@@ -17,5 +17,7 @@
  */
 
 public class MineSweeperApp {
+
+
     
 }

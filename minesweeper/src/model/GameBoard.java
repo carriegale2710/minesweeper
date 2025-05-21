@@ -1,4 +1,4 @@
-/*SECTION 1. GameBoard class (`model` package):
+/*SECTION 2. GameBoard class (`model` package):
 
   THIS CLASS SHOULD:
   - mainly handle inital board setup and updating its state only
