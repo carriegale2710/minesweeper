@@ -44,6 +44,8 @@ public class MineSweeperApp {
  
     //set the board
     GameBoard gameboard = new GameBoard();
+
+    //set up grid values on board
     int[][] hiddenGrid = gameboard.setHiddenGrid(selectedLevel);
     int[][] displayGrid = gameboard.setDisplayGrid(selectedLevel);
 
@@ -52,11 +54,17 @@ public class MineSweeperApp {
     
     while (numOfMoves > 0){
       numOfMoves = numOfMoves -1;
+      System.err.println("num of moves left: " + numOfMoves);
+
+      //print the hidden grid (for debugging)
       System.out.println();
-      System.err.println("num of moves left" + numOfMoves);
-      
-      gameDisplay.printHiddenGrid(hiddenGrid);
-      gameDisplay.printDisplayGrid(displayGrid);
+      System.out.println("hidden grid:");
+      gameDisplay.printGrid(hiddenGrid);
+
+      //print the display grid (what user will see)
+      System.out.println();
+      System.out.println("visible grid:");
+      gameDisplay.printGrid(displayGrid);
 
       int[] coordinate = playerMoveInput(scan);
       
@@ -87,8 +95,10 @@ public class MineSweeperApp {
     } 
     System.out.println();
     System.out.println("You selected: Level " + selectedLevel);
-    System.out.println("Loading...");
     System.out.println();
+    System.out.println("----- SETTING UP NEW GAME -----");
+    System.out.println();
+    System.out.println("Loading...");
     return selectedLevel;
   }
 

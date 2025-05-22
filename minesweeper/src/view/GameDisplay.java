@@ -51,34 +51,39 @@ public class GameDisplay {
 
   //SECTION - DISPLAY GRID
 
-  public void printHiddenGrid(int[][] hiddenGrid){
-    //update diaply grid based on changes to the hiddengrid
-    System.out.println();
-    System.out.println("hidden grid:");
-    for (int[] rowArr : hiddenGrid) {
-        System.out.print("|"); 
-        for (int cell : rowArr) {
-          System.out.print(cell); // print each cell
-          System.out.print("|"); 
-        }
-      System.out.println(); // move to next line after each row
-    } 
-  }
+  // public void printHiddenGrid(int[][] hiddenGrid){
+  //   //update diaply grid based on changes to the hiddengrid
+  //   System.out.println();
+  //   System.out.println("hidden grid:");
+  //   for (int[] rowArr : hiddenGrid) {
+  //       System.out.print("|"); 
+  //       for (int cell : rowArr) {
+  //         System.out.print(cell); // print each cell
+  //         System.out.print("|"); 
+  //       }
+  //     System.out.println(); // move to next line after each row
+  //   } 
+  // }
   
 
-  public void printDisplayGrid(int[][] displayGrid){
-    //update diaply grid based on changes to the display grid 
-    System.out.println();
-    System.out.println("display grid:");
-    for (int[] rowArr : displayGrid) {
+  // public void printDisplayGrid(int[][] displayGrid){
+  //   //update diaply grid based on changes to the display grid 
+  //   System.out.println();
+  //   System.out.println("display grid:");
+    
+  // }
+
+  public void printGrid(int[][] anyGrid){ //either hidden or display grid is passed in
+    for (int[] rowArr : anyGrid) {
         System.out.print("|"); 
         for (int cell : rowArr) {
             System.out.print(cell); // print each cell
             System.out.print("|"); 
         }
-        System.out.println(); // move to next line after each row
+      System.out.println(); // move to next line after each row
     } 
   }
+
 
 
   
