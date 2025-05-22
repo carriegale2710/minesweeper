@@ -46,39 +46,40 @@ public class MineSweeperApp {
     GameBoard gameboard = new GameBoard();
 
     //set up grid values on board
-    int[][] hiddenGrid = gameboard.setHiddenGrid(selectedLevel);
-    int[][] displayGrid = gameboard.setDisplayGrid(selectedLevel);
+    int gridSize = gameboard.getGridSize(selectedLevel);
+    Integer[][] hiddenGrid = gameboard.setHiddenGrid(gridSize);
+    String[][] displayGrid = gameboard.setDisplayGrid(gridSize);
+    // Boolean[][] visibilityGrid =  gameboard.setVisibilityGrid(gridSize);
 
-    //play move -- add loop that continues until win/lose condition is met
-    int numOfMoves = 3; //for testing change later
+    //setup up win/lose conditions
+    boolean gameOver = false;
+    boolean gameWon = false;
     
-    while (numOfMoves > 0){
-      numOfMoves = numOfMoves -1;
-      System.err.println("num of moves left: " + numOfMoves);
-
-      //print the hidden grid (for debugging)
-      System.out.println();
-      System.out.println("hidden grid:");
-      gameDisplay.printGrid(hiddenGrid);
+    //NOTE - game running loop --> loop that continues until win/lose condition is met
+    
+    //print the hidden grid (for debugging)
+    System.out.println("\nhidden grid:");
+    gameDisplay.printGrid(hiddenGrid);
+    
+    while (gameOver == false && gameWon == false){
+      System.out.println("\n--- NEXT MOVE --- ");
 
       //print the display grid (what user will see)
-      System.out.println();
-      System.out.println("visible grid:");
+      System.out.println("\ncurrent grid:");
       gameDisplay.printGrid(displayGrid);
-
+      
       int[] coordinate = playerMoveInput(scan);
       
-      boolean gameOver = gameController.isMineAt(hiddenGrid, coordinate); //check is selected coordinate contains a mine
-      boolean gameWon = gameController.checkWin(hiddenGrid, displayGrid);
-      
+      gameOver = gameController.isMineAt(hiddenGrid, coordinate); //check is selected coordinate contains a mine
+      // gameWon = gameController.checkWin(hiddenGrid, displayGrid);
       gameDisplay.moveResultMessage(gameOver, gameWon); // prints out result of player's move (win/loss/safe)
       
-      //end the game if win/loss condition is met
-      if (gameOver || gameWon) {
-        System.out.println("Goodbye :)");
-        System.exit(0); 
-      }
+    }
 
+    //end the game if win/loss condition is met
+    if (gameOver || gameWon) {
+      System.out.println("Game finished :)");
+      System.exit(0); 
     }
 
     //close scanner
@@ -102,16 +103,20 @@ public class MineSweeperApp {
     return selectedLevel;
   }
 
+
   public static int[] playerMoveInput(Scanner scan) {
-    System.out.println();
-    System.out.println("--- NEXT MOVE --- ");
-    System.out.println();
-    System.out.println("Please enter a row and column to reveal the square.");
-    System.out.print("Enter row: ");
+
+    System.out.println("\nPlease enter a row and column to reveal the square.");
+
+    System.out.print("- Enter row: ");
     int row = scan.nextInt();
-    System.out.print("Enter column: ");
+    //error handle
+
+    System.out.print("- Enter column: ");
     int column = scan.nextInt();
-    System.out.println("You entered: " + row+ ","+ column);
+    //error handle
+
+    System.out.println("\nYou entered: (" + row+ ","+ column+")");
     // add input validation - out of bounds, NaN, too many inputs etc.
     int [] coordinate = new int[] {row, column};
     return coordinate;
@@ -124,6 +129,7 @@ public class MineSweeperApp {
     //if yes resetGame? - create new instance of the MineSweeperApp? //can track num of games won vs lost this way too
     return response;
   }
+
 
 
 

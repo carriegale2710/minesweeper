@@ -14,6 +14,9 @@
 
 package view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GameDisplay {
 
   //SECTION Game messages
@@ -37,6 +40,7 @@ public class GameDisplay {
   public void moveResultMessage(boolean gameOver, boolean gameWon) {
     //only shows when game is over (either win/loss)
     System.out.println();
+    System.out.println("-----------------------------");
     if (gameOver){
       //insert method here to display the hidden grid (or just mine locations)
       System.out.println("BOOM! You stepped on a mine :(");
@@ -45,43 +49,48 @@ public class GameDisplay {
     } else {
       System.out.println("No mines here, your safe.");
     }
+    System.out.println("-----------------------------");
   }
 
 
 
   //SECTION - DISPLAY GRID
 
-  // public void printHiddenGrid(int[][] hiddenGrid){
-  //   //update diaply grid based on changes to the hiddengrid
-  //   System.out.println();
-  //   System.out.println("hidden grid:");
-  //   for (int[] rowArr : hiddenGrid) {
-  //       System.out.print("|"); 
-  //       for (int cell : rowArr) {
-  //         System.out.print(cell); // print each cell
-  //         System.out.print("|"); 
-  //       }
-  //     System.out.println(); // move to next line after each row
-  //   } 
-  // }
-  
 
-  // public void printDisplayGrid(int[][] displayGrid){
-  //   //update diaply grid based on changes to the display grid 
-  //   System.out.println();
-  //   System.out.println("display grid:");
-    
-  // }
+  public <T> void printGrid(T[][] anyGrid){ //either hidden or display grid is passed in
+    // int length = anyGrid.length;
+    // T[][] copyGrid = Arrays.copyOf(anyGrid, length);
+    // String[][] printGrid = (String[][]) copyGrid;
+    ArrayList<String> columnKeys = new ArrayList<>();
 
-  public void printGrid(int[][] anyGrid){ //either hidden or display grid is passed in
-    for (int[] rowArr : anyGrid) {
-        System.out.print("|"); 
-        for (int cell : rowArr) {
-            System.out.print(cell); // print each cell
-            System.out.print("|"); 
+    //row loop
+    for (int rowIndex = 0; rowIndex < anyGrid.length; rowIndex++) {
+      if (rowIndex < 10){
+        columnKeys.add(rowIndex+ "  ");
+        System.out.print(" "+rowIndex + " | "); //row index label
+      } else {
+        columnKeys.add(rowIndex+ " ");
+        System.out.print(rowIndex + " | "); //row index label
+      }
+      T[] rowArr = anyGrid[rowIndex];
+
+      //cell loop 
+      for (T cell : rowArr) { 
+        if (cell.equals(-1)){ //for alignment only
+        System.out.print(cell + "| "); //row value
+        } else {
+          System.out.print(cell + " | "); //row value
         }
+      }
       System.out.println(); // move to next line after each row
+
     } 
+    // column index label
+    System.out.println("     " + columnKeys.stream()
+      .map(Object::toString)
+      .collect(java.util.stream.Collectors.joining(" ")
+      
+    ));
   }
 
 

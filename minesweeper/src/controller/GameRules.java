@@ -17,22 +17,10 @@ package controller;
 
 public class GameRules {
 
-  //if no non-mines remaining - user wins
+
   
-  public boolean checkWin(int[][] hiddenGrid, int[][] displayGrid) {
-    //needs to check all elements
-      for (int row = 0; row < hiddenGrid.length; row++) {
-          for (int column = 0; column < hiddenGrid[0].length; column++) {
-              if (hiddenGrid[row][column] != -1 && displayGrid[row][column] == -2) {
-                  return false;
-              }
-          }
-      }
-      return true;
-  }
-
-
-  public boolean isMineAt(int[][] hiddenGrid, int[] coordinate) {
+  
+  public boolean isMineAt(Integer[][] hiddenGrid, int[] coordinate) {
     //coordinates from user input passed in too
     int row = coordinate[0];
     int column = coordinate[1];
@@ -40,9 +28,25 @@ public class GameRules {
     boolean mineIsPresent = hiddenGrid[row][column] == -1;
     return mineIsPresent ;
   }
-
-
-
-
+  
+  public boolean checkWin(Integer[][] hiddenGrid, String[][] displayGrid) {
+    //if no non-mines remaining - user wins --> needs to check all elements
     
+    //loop thru each row
+    for (int row = 0; row < hiddenGrid.length; row++) { 
+      //loop cols/cells in row
+      for (int col = 0; col < hiddenGrid[0].length; col++) { //loop cols in row
+        //check if cell is still hidden
+        if (displayGrid[row][col] == "?") {  //FIXME - boolean[][] = {[true,true],[]};
+          return false; //not yet
+        }
+      }
+    }
+    return true;
+    
+  }
+  
+  
+  
+  
 }

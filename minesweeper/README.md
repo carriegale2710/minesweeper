@@ -1,5 +1,7 @@
 # Braindump
 
+
+
 # Arrays/mapping
 
 ## Visible Map Array
