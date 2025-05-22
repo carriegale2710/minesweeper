@@ -34,6 +34,33 @@ public class GameBoard {
     for (String[] rowArr : displayGrid) Arrays.fill(rowArr, "?");
     return displayGrid;
   }
+
+  public String[][] revealCoordinate(int[] coordinates, Integer[][] hiddenGrid, String[][] displayGrid) {
+    System.out.println("revealCoordinate running");
+
+    //coordinates
+    System.out.println("coordinates received: " + coordinates);
+    int row = coordinates[0];
+    int col = coordinates[1];
+    
+    //needs to swap the displayGrid value at coodinates with the same one as hiddenGrid 
+    int hiddenValue = hiddenGrid[row][col];
+    System.out.println("value: " + hiddenValue);
+
+    //if number 1-8, print in that number
+    //if value is 0, print in " "
+    //if value is -1, print in "*"
+
+    if (hiddenValue == -1){
+      displayGrid[row][col] = "*";
+    } else if (hiddenValue == 0) {
+      displayGrid[row][col] = " ";
+    } else {
+      displayGrid[row][col] = Integer.toString(hiddenValue) ;
+    }
+
+    return displayGrid;
+  }
   
   // public Boolean[][] setVisibilityGrid(int gridSize){
   //   Boolean[][] visibilityGrid = new Boolean[gridSize][gridSize];

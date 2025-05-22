@@ -20,10 +20,10 @@ public class GameRules {
 
   
   
-  public boolean isMineAt(Integer[][] hiddenGrid, int[] coordinate) {
+  public boolean isMineAt(Integer[][] hiddenGrid, int[] coordinates) {
     //coordinates from user input passed in too
-    int row = coordinate[0];
-    int column = coordinate[1];
+    int row = coordinates[0];
+    int column = coordinates[1];
     //only needs to check one element in whole grid array -the one the user choose
     boolean mineIsPresent = hiddenGrid[row][column] == -1;
     return mineIsPresent ;

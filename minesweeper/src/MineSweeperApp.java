@@ -58,11 +58,11 @@ public class MineSweeperApp {
       System.out.println("\ncurrent grid:");
       gameDisplay.printGrid(displayGrid);
 
-      int[] coordinate = playerMoveInput(scan, gridSize);
-      
-      gameOver = gameController.isMineAt(hiddenGrid, coordinate); //check if selected coordinate contains a mine
+      int[] coordinates = playerMoveInput(scan, gridSize);
+      gameOver = gameController.isMineAt(hiddenGrid, coordinates); //check if selected coordinate contains a mine
       // gameWon = gameController.checkWin(hiddenGrid, displayGrid);
       gameDisplay.moveResultMessage(gameOver, gameWon); // prints out result of player's move (win/loss/safe)
+      gameboard.revealCoordinate(coordinates, hiddenGrid, displayGrid);
       
     }
     
