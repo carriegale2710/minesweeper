@@ -67,19 +67,19 @@ public class GameDisplay {
     for (int rowIndex = 0; rowIndex < anyGrid.length; rowIndex++) {
       if (rowIndex < 10){
         columnKeys.add(rowIndex+ "  ");
-        System.out.print(" "+rowIndex + " | "); //row index label
+        System.out.print(" "+rowIndex + " |"); //row index label
       } else {
         columnKeys.add(rowIndex+ " ");
-        System.out.print(rowIndex + " | "); //row index label
+        System.out.print(rowIndex + " |"); //row index label
       }
       T[] rowArr = anyGrid[rowIndex];
 
       //cell loop 
       for (T cell : rowArr) { 
         if (cell.equals(-1)){ //for alignment only
-        System.out.print(cell + "| "); //row value
+        System.out.print(cell + " |"); //row value
         } else {
-          System.out.print(cell + " | "); //row value
+          System.out.print(" " +cell + " |"); //row value
         }
       }
       System.out.println(); // move to next line after each row
