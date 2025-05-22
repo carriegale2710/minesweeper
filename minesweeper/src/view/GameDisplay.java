@@ -45,9 +45,9 @@ public class GameDisplay {
       //insert method here to display the hidden grid (or just mine locations)
       System.out.println("BOOM! You stepped on a mine :(");
     } else if (gameWon) {
-      System.out.println("Congrats! You won the game!");
+      System.out.println("Congrats! You won the game! :D");
     } else {
-      System.out.println("No mines here, your safe.");
+      System.out.println("No mines here, your safe. :)");
     }
     System.out.println("-----------------------------");
   }
@@ -67,10 +67,10 @@ public class GameDisplay {
     for (int rowIndex = 0; rowIndex < anyGrid.length; rowIndex++) {
       if (rowIndex < 10){
         columnKeys.add(rowIndex+ "  ");
-        System.out.print(" "+rowIndex + " |"); //row index label
+        System.out.print(" "+rowIndex + " |"); //row keys
       } else {
         columnKeys.add(rowIndex+ " ");
-        System.out.print(rowIndex + " |"); //row index label
+        System.out.print(rowIndex + " |"); //row keys
       }
       T[] rowArr = anyGrid[rowIndex];
 

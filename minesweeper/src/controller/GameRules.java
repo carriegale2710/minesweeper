@@ -36,8 +36,8 @@ public class GameRules {
     for (int row = 0; row < hiddenGrid.length; row++) { 
       //loop cols/cells in row
       for (int col = 0; col < hiddenGrid[0].length; col++) { //loop cols in row
-        //check if cell is still hidden
-        if (displayGrid[row][col] == "?") {  //FIXME - boolean[][] = {[true,true],[]};
+        //check if cell is still hidden 
+        if (hiddenGrid[row][col] != -1 && displayGrid[row][col] == "?") {  //FIXME - boolean[][] = {[true,true],[]};
           return false; //not yet
         }
       }
