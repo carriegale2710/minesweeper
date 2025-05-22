@@ -15,6 +15,6 @@
 
 package controller;
 
-public class GameController {
+public class GameRules {
     
 }

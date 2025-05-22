@@ -16,8 +16,60 @@
   3. view/BoardDisplay -> game display/rendering to console
  */
 
+import java.util.Scanner;
+
+import controller.GameRules;
+import model.GameBoard;
+import view.GameDisplay;
+
+
 public class MineSweeperApp {
-
-
+  
+  
+  public static void main(String[] args) {
+    //userinputs
+    Scanner scan = new Scanner(System.in);
     
+    //create instances
+    MineSweeperApp MineSweeper = new MineSweeperApp();
+    GameRules gameController = new GameRules();
+    GameDisplay gameDisplay = new GameDisplay();
+    
+    //print game intro
+    gameDisplay.gameBootUp(); 
+    
+    //user selects game level
+    gameDisplay.gameLevelPrompt();
+    int selectedLevel = levelSelectInput(scan); 
+    
+    //set the board
+    GameBoard gameboard = new GameBoard();
+    int[][] hiddenGrid = gameboard.setHiddenGrid(selectedLevel);
+    System.out.println(hiddenGrid);
+
+
+    //close scanner
+    scan.close();
+  }
+  
+  static int levelSelectInput(Scanner scan) {
+    int selectedLevel = scan.nextInt();
+    
+    while (selectedLevel < 1 || selectedLevel > 5){
+      System.out.println("Invalid Input. Please enter level 0-4 only.");
+      selectedLevel = scan.nextInt();
+    } 
+    System.out.println("You selected: Level " + selectedLevel);
+    System.out.println("Loading...");
+    return selectedLevel;
+  }
+
+  
+
+  
+  
+
+
+
 }
+
