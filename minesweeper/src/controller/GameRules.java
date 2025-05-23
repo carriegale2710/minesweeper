@@ -17,10 +17,8 @@ package controller;
 
 public class GameRules {
 
-
-  
-  
   public boolean isMineAt(Integer[][] hiddenGrid, int[] coordinates) {
+    System.out.println("Checking for mines...");
     //coordinates from user input passed in too
     int row = coordinates[0];
     int column = coordinates[1];
@@ -31,6 +29,7 @@ public class GameRules {
   
   public boolean checkWin(Integer[][] hiddenGrid, String[][] displayGrid) {
     //if no non-mines remaining - user wins --> needs to check all elements
+    System.out.println("Checking win...");
     
     //loop thru each row
     for (int row = 0; row < hiddenGrid.length; row++) { 
@@ -45,8 +44,6 @@ public class GameRules {
     return true;
     
   }
-  
-  
   
   
 }

@@ -48,26 +48,28 @@ public class MineSweeperApp {
     boolean gameWon = false;
 
     //NOTE - game running loop --> loop that continues until win/lose condition is met
-    //print the hidden grid (for debugging)
-    System.out.println("\nhidden grid:");
-    gameDisplay.printGrid(hiddenGrid);
     
     while (gameOver == false && gameWon == false) {
+      //print the hidden grid (for debugging)
+      System.out.println("\nhidden grid:");
+      gameDisplay.printGrid(hiddenGrid);
+      
       System.out.println("\n--- NEXT MOVE --- ");
       //print the display grid (what user will see)
-      System.out.println("\ncurrent grid:");
+      // System.out.println("\ncurrent grid:");
       gameDisplay.printGrid(displayGrid);
 
       int[] coordinates = playerMoveInput(scan, gridSize);
-      gameOver = gameController.isMineAt(hiddenGrid, coordinates); //check if selected coordinate contains a mine
-      // gameWon = gameController.checkWin(hiddenGrid, displayGrid);
-      gameDisplay.moveResultMessage(gameOver, gameWon); // prints out result of player's move (win/loss/safe)
       gameboard.revealCoordinate(coordinates, hiddenGrid, displayGrid);
+      gameOver = gameController.isMineAt(hiddenGrid, coordinates); //check if selected coordinate contains a mine
+      gameWon = gameController.checkWin(hiddenGrid, displayGrid);
+      gameDisplay.moveResultMessage(gameOver, gameWon); // prints out result of player's move (win/loss/safe)
       
     }
     
     //end the game if win/loss condition is met
     if (gameOver || gameWon) {
+      //revealAllMines
       System.out.println("Game finished :)");
     }
     //close scanner

@@ -36,16 +36,16 @@ public class GameBoard {
   }
 
   public String[][] revealCoordinate(int[] coordinates, Integer[][] hiddenGrid, String[][] displayGrid) {
-    System.out.println("revealCoordinate running");
+    // System.out.println("revealCoordinate running");
 
     //coordinates
-    System.out.println("coordinates received: " + coordinates);
     int row = coordinates[0];
     int col = coordinates[1];
+    // System.out.println("coordinates received: " + row + ", " + col + "." );
     
     //needs to swap the displayGrid value at coodinates with the same one as hiddenGrid 
     int hiddenValue = hiddenGrid[row][col];
-    System.out.println("value: " + hiddenValue);
+    // System.out.println("value: " + hiddenValue);
 
     //if number 1-8, print in that number
     //if value is 0, print in " "
