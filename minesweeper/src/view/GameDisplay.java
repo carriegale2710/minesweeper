@@ -22,10 +22,10 @@ public class GameDisplay {
   //SECTION Game messages
   
   //NOTE - print intro on bootup (could put instructions/game rules here later if needed for better UX)
-  public void gameIntro() {
-    System.out.println();
+  public void gameIntro(){
+    System.out.println("\n-----------------------------\n");
     System.out.println("Welcome to MineSweeper");
-
+    System.out.println("\n-----------------------------\n");
   }
 
   //NOTE - prints at bootup only - user selects level aka grid size
@@ -49,7 +49,7 @@ public class GameDisplay {
     } else if (gameWon) {
       System.out.println("Congrats! You won the game! :D");
     } else {
-      System.out.println("No mines here, your safe. :)");
+      System.out.println("No mines here, you're safe. :)");
     }
     System.out.println("-----------------------------");
   }
@@ -59,9 +59,12 @@ public class GameDisplay {
   //NOTE - prints either hidden or display grid 
 
   public <T> void printGrid(T[][] anyGrid){ 
-
     ArrayList<String> columnKeys = new ArrayList<>();
-
+    System.out.print("   +");
+    for (int i=0;i<anyGrid.length;i++){
+      System.out.print("---+");
+    }
+    System.out.println();
     //row loop
     for (int rowIndex = 0; rowIndex < anyGrid.length; rowIndex++) {
       // print row keys
@@ -83,15 +86,20 @@ public class GameDisplay {
           System.out.print(" " +cell + " |"); //row value
         }
       }
-      System.out.println(); // move to next line after each row
-
+      // move to next line after each row
+      System.out.print("\n   +");
+      for (int i=0;i<anyGrid.length;i++){
+        System.out.print("---+");
+      }
+      System.out.println();
     } 
 
     // get column keys
     System.out.println("     " + columnKeys.stream()
       .map(Object::toString)
       .collect(java.util.stream.Collectors.joining(" ")
-      
     ));
   } 
+
+
 }
