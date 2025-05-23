@@ -96,23 +96,57 @@ public class GameBoard {
     System.out.println();
   }
 
-  private void setNumbers(Integer[][] hiddenGrid){
-    for (int row = 0; row < hiddenGrid.length; row++) {
-      for (int col = 0; col < hiddenGrid[0].length; col++) {
-        if (hiddenGrid[row][col] == -1) continue;
-        int count = 0;
-        for (int x = -1; x <= 1; x++) {
-          for (int y = -1; y <= 1; y++) {
-            int nRow = row + x, nCol = col + y;
-            if (nRow >= 0 && nRow < hiddenGrid.length && nCol >= 0 && nCol < hiddenGrid[0].length) {
-              if (hiddenGrid[nRow][nCol] == -1) count++;
+    private void setNumbers(Integer[][] hiddenGrid){
+    //loop through each row
+    for (int row = 0; row < hiddenGrid.length; row ++){
+      //loop through each col/cell in this row
+      for (int col = 0; col < hiddenGrid[0].length; col++){
+        int currentCell = hiddenGrid[row][col];
+        if (currentCell == -1) {//if cell has mine, skip
+          continue;
+        } else { //loop thru neighbours for mines (has value of -1) if yes, add to count.  (there are 8 neighbours)
+          int minesCount = 0; 
+          //check position at:
+            // 1. top-left = (x-1, y-1)
+            if (hiddenGrid[row-1][col-1] == -1) {
+              minesCount++;
             }
-          }
+            // 2. top = (x, y-1)
+            if (hiddenGrid[row][col-1] == -1) {
+              minesCount++;
+            }
+            // 3. top-right = (x+1, y-1)
+            if (hiddenGrid[row+1][col-1] == -1) {
+              minesCount++;
+            }
+            // 4. left = (x-1, y)
+            if (hiddenGrid[row-1][col] == -1) {
+              minesCount++;
+            }
+            // center = (x,y)
+            // 5. right = (x+1,y)
+            if (hiddenGrid[row+1][col] == -1) {
+              minesCount++;
+            }
+            // 6. bottom-left = (x-1,y+1)
+            if (hiddenGrid[row-1][col+1] == -1) {
+              minesCount++;
+            }
+            // 7. bottom = (x,y+1)
+            if (hiddenGrid[row][col+1] == -1) {
+              minesCount++;
+            }
+            // 8. bottom-right = (x+1,y+1)
+            if (hiddenGrid[row+1][col+1] == -1) {
+              minesCount++;
+            }
+          hiddenGrid[row][col] = minesCount;//set the value of the current cell as the minesCount   
         }
-        hiddenGrid[row][col] = count;
       }
     }
   }
+
+
 
 
 
