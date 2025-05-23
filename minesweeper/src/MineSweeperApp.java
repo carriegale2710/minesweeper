@@ -50,7 +50,7 @@ public class MineSweeperApp {
 
     //NOTE - The main game running loop --> continues until win/lose condition is met:
     while (gameOver == false && gameWon == false) {
-      // gameDisplay.printGrid(hiddenGrid); //(for debugging)
+      gameDisplay.printGrid(hiddenGrid); //(for debugging)
       gameDisplay.printGrid(displayGrid); 
 
       System.out.println("\n--- NEXT MOVE --- ");
