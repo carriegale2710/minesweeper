@@ -29,23 +29,19 @@ public class GameBoard {
   }
 
   public String[][] setDisplayGrid(int gridSize){
-    //the grid the user should seeupdates based on revealed tiles by user
+    //the grid the user should see updates based on revealed tiles by user
     String[][] displayGrid = new String[gridSize][gridSize];
     for (String[] rowArr : displayGrid) Arrays.fill(rowArr, "?");
     return displayGrid;
   }
 
   public String[][] revealCoordinate(int[] coordinates, Integer[][] hiddenGrid, String[][] displayGrid) {
-    // System.out.println("revealCoordinate running");
-    
     // get coordinates
     int row = coordinates[0];
     int col = coordinates[1];
-    // System.out.println("coordinates received: " + row + ", " + col + "." );
     
     //get value of that specific coordinate
     int hiddenValue = hiddenGrid[row][col];
-    // System.out.println("value: " + hiddenValue);
     
     //reveal the hidden value on the display grid
     if (hiddenValue == -1){
@@ -55,8 +51,21 @@ public class GameBoard {
     } else {
       displayGrid[row][col] = Integer.toString(hiddenValue) ; //number tiles
     }
-
     return displayGrid;
+  }
+
+  //reveal the hidden value on the display grid for all mines
+  public void revealAllMines(Integer[][] hiddenGrid, String[][] displayGrid) {
+    //loop through each row
+    for (int row = 0; row < hiddenGrid.length; row ++){
+      //loop through each col/cell in this row
+      for (int col = 0; col < hiddenGrid[0].length; col++){
+        int currentCell = hiddenGrid[row][col];
+        if (currentCell == -1) {//if cell has mine, skip
+          displayGrid[row][col] = "*";
+        }
+      }
+    }
   }
   
   public int getGridSize(int selectedlevel) {
@@ -102,7 +111,6 @@ public class GameBoard {
       //loop through each col/cell in this row
       for (int col = 0; col < hiddenGrid[0].length; col++){
         int currentCell = hiddenGrid[row][col];
-        System.out.println("row,col: "+row+","+col);
         if (currentCell == -1) {//if cell has mine, skip
           continue; //skip
         }
@@ -114,21 +122,16 @@ public class GameBoard {
             //coordinates of neigbours
             int nRow = row+x;
             int nCol = col+y;
-            System.out.println("nRow,nCol: "+nRow+","+nCol);
             //check the coordinates are inside grid bounds (less than gridvalue)
             if ((nRow < 0 || nRow >= hiddenGrid.length) || (nCol < 0 || nCol >= hiddenGrid[0].length)){
-              System.out.println("out of bounds");
               continue; //skip
             }
             //if value is -1, add to count
             if (hiddenGrid[nRow][nCol] == -1){
-              System.out.println("Is a mine");
               minesCount++;
             }  
             //update to final no. of mines counted in neigbour tiles
             hiddenGrid[row][col] = minesCount;
-            System.out.println("Mines count: "+ minesCount);
-
           }
         }
       }

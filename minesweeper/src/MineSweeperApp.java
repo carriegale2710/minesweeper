@@ -25,7 +25,6 @@ import view.GameDisplay;
 
 public class MineSweeperApp {
   public static void main(String[] args) {
-
     Scanner scan = new Scanner(System.in); //userinputs
 
     //create instances / import methods 
@@ -50,7 +49,7 @@ public class MineSweeperApp {
 
     //NOTE - The main game running loop --> continues until win/lose condition is met:
     while (gameOver == false && gameWon == false) {
-      gameDisplay.printGrid(hiddenGrid); //(for debugging)
+      // gameDisplay.printGrid(hiddenGrid); //(for debugging)
       gameDisplay.printGrid(displayGrid); 
 
       System.out.println("\n--- NEXT MOVE --- ");
@@ -64,8 +63,9 @@ public class MineSweeperApp {
     //NOTE - END OF GAME 
     //end the game if win/loss condition is met
     if (gameOver || gameWon) {
-      //revealAllMines
-      System.out.println("Game finished :)");
+      gameboard.revealAllMines(hiddenGrid, displayGrid);
+      gameDisplay.printGrid(displayGrid);
+      System.out.println("\nGame finished :)");
     }
 
     scan.close();
