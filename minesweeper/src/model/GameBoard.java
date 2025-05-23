@@ -37,37 +37,28 @@ public class GameBoard {
 
   public String[][] revealCoordinate(int[] coordinates, Integer[][] hiddenGrid, String[][] displayGrid) {
     // System.out.println("revealCoordinate running");
-
-    //coordinates
+    
+    // get coordinates
     int row = coordinates[0];
     int col = coordinates[1];
     // System.out.println("coordinates received: " + row + ", " + col + "." );
     
-    //needs to swap the displayGrid value at coodinates with the same one as hiddenGrid 
+    //get value of that specific coordinate
     int hiddenValue = hiddenGrid[row][col];
     // System.out.println("value: " + hiddenValue);
-
-    //if number 1-8, print in that number
-    //if value is 0, print in " "
-    //if value is -1, print in "*"
-
+    
+    //reveal the hidden value on the display grid
     if (hiddenValue == -1){
-      displayGrid[row][col] = "*";
+      displayGrid[row][col] = "*"; //mine tiles
     } else if (hiddenValue == 0) {
-      displayGrid[row][col] = " ";
+      displayGrid[row][col] = " "; //blank tiles
     } else {
-      displayGrid[row][col] = Integer.toString(hiddenValue) ;
+      displayGrid[row][col] = Integer.toString(hiddenValue) ; //number tiles
     }
 
     return displayGrid;
   }
   
-  // public Boolean[][] setVisibilityGrid(int gridSize){
-  //   Boolean[][] visibilityGrid = new Boolean[gridSize][gridSize];
-  //   for (Boolean[] rowArr : visibilityGrid) Arrays.fill(rowArr, false); //set all to false
-  //   return visibilityGrid;
-  // }
-
   public int getGridSize(int selectedlevel) {
     //depends on level selected //this determines no. of mines too
     int gridSize = 0;
@@ -90,21 +81,15 @@ public class GameBoard {
     //depends on level selected
     int numOfMines = hiddenGrid.length;
     System.out.println("no.of mines: " + numOfMines);
-    System.out.println();
-    System.out.println("Mine Coodinates randomly generated: ");
-    System.out.println("- Key: (row,column)");
-
-
     //place mines inside hidden grid at coordinate
     int minesPlaced = 0;
     while (minesPlaced < numOfMines){
       //generate random coordinates
-      int row = (int)(Math.random()*hiddenGrid[0].length);
-      int col = (int)(Math.random()*hiddenGrid[1].length);
-      // int[] mine =  new int[] {row, col};
-      if (hiddenGrid[row][col] != -1){ // NOTE - MINE VALIDATION: only put if mine not at this index already
-        hiddenGrid[row][col] = -1; //add mine (represented by -1)
-        System.out.println("- mine"+minesPlaced+": ("+row+","+col+")");
+      int row = (int)(Math.random()*numOfMines);
+      int col = (int)(Math.random()*numOfMines);
+      // NOTE - MINE VALIDATION: only if mine not at this index already
+      if (hiddenGrid[row][col] != -1){ 
+        hiddenGrid[row][col] = -1; //add mine at this index in array (represented by -1)
         minesPlaced ++;
       }
     }
@@ -113,18 +98,18 @@ public class GameBoard {
 
   private void setNumbers(Integer[][] hiddenGrid){
     for (int row = 0; row < hiddenGrid.length; row++) {
-      for (int column = 0; column < hiddenGrid[0].length; column++) {
-        if (hiddenGrid[row][column] == -1) continue;
+      for (int col = 0; col < hiddenGrid[0].length; col++) {
+        if (hiddenGrid[row][col] == -1) continue;
         int count = 0;
         for (int x = -1; x <= 1; x++) {
           for (int y = -1; y <= 1; y++) {
-            int nRow = row + x, nColumn = column + y;
-            if (nRow >= 0 && nRow < hiddenGrid.length && nColumn >= 0 && nColumn < hiddenGrid[0].length) {
-              if (hiddenGrid[nRow][nColumn] == -1) count++;
+            int nRow = row + x, nCol = col + y;
+            if (nRow >= 0 && nRow < hiddenGrid.length && nCol >= 0 && nCol < hiddenGrid[0].length) {
+              if (hiddenGrid[nRow][nCol] == -1) count++;
             }
           }
         }
-        hiddenGrid[row][column] = count;
+        hiddenGrid[row][col] = count;
       }
     }
   }

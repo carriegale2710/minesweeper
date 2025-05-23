@@ -8,10 +8,10 @@ Recreate a simplified version of the game Minesweeper to be played in the java c
 
 - [x] The game should be able to randomly generate 10 mines in a 10x10 grid - (3x3 done)
 - [x] The user will be able to enter a command that represents a coordinate to check a location for a mine
-- [T] The application will display a number from 0-8 depending on how many mines surround that location - needs error handling
-- [T] If the user selects a mine, the game will respond "boom!" and the game will be lost
-- [T] If every non-mine square has been revealed, the game is won -testing
-- [ ] Render the grid to the console after every user command
+- [x] The application will display a number from 0-8 depending on how many mines surround that location - needs error handling
+- [x] If the user selects a mine, the game will respond "boom!" and the game will be lost
+- [x] If every non-mine square has been revealed, the game is won -testing
+- [x] Render the grid to the console after every user command
 
 ## Bonuses (optional)
 
@@ -117,9 +117,9 @@ MVC is used to split the code into three parts:
 - anything the player can see on the console
 - view package -> BoardDisplay class
 
-3. Controller (logic and input)
+3. Controller (logic)
 
-- game input, game flow/state, moves, win/lose conditions, game loop
+- win/lose condition
 - controller package -> GameController class
 
 ### Purpose/Benefits of MVC pattern:

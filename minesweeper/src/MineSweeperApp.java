@@ -25,62 +25,58 @@ import view.GameDisplay;
 
 public class MineSweeperApp {
   public static void main(String[] args) {
-    //userinputs
-    Scanner scan = new Scanner(System.in);
-    //create instances
+
+    Scanner scan = new Scanner(System.in); //userinputs
+
+    //create instances / import methods 
     MineSweeperApp MineSweeper = new MineSweeperApp();
-    GameRules gameController = new GameRules();
+    GameRules gameStatus = new GameRules();
     GameDisplay gameDisplay = new GameDisplay();
-    //print game intro
-    gameDisplay.gameIntro();
-    //user selects game level
+
+    //NOTE - Game App boots up
+    gameDisplay.gameIntro(); 
     gameDisplay.gameLevelPrompt();
-    int selectedLevel = levelSelectInput(scan);
-    //set the board
-    GameBoard gameboard = new GameBoard();
-    //set up grid values on board
-    int gridSize = gameboard.getGridSize(selectedLevel);
-    Integer[][] hiddenGrid = gameboard.setHiddenGrid(gridSize);
-    String[][] displayGrid = gameboard.setDisplayGrid(gridSize);
-    // Boolean[][] visibilityGrid =  gameboard.setVisibilityGrid(gridSize);
-    //setup up win/lose conditions
+    int selectedLevel = levelSelectInput(scan);  
+    
+    //NOTE - GAME SETUP
+    GameBoard gameboard = new GameBoard(); //generate new board
+    int gridSize = gameboard.getGridSize(selectedLevel); //set grid size 
+    //generate tile values
+    Integer[][] hiddenGrid = gameboard.setHiddenGrid(gridSize); 
+    String[][] displayGrid = gameboard.setDisplayGrid(gridSize); 
+    //reset win/lose conditions
     boolean gameOver = false;
     boolean gameWon = false;
 
-    //NOTE - game running loop --> loop that continues until win/lose condition is met
-    
+    //NOTE - The main game running loop --> continues until win/lose condition is met:
     while (gameOver == false && gameWon == false) {
-      //print the hidden grid (for debugging)
-      System.out.println("\nhidden grid:");
-      gameDisplay.printGrid(hiddenGrid);
-      
-      System.out.println("\n--- NEXT MOVE --- ");
-      //print the display grid (what user will see)
-      // System.out.println("\ncurrent grid:");
-      gameDisplay.printGrid(displayGrid);
+      // gameDisplay.printGrid(hiddenGrid); //(for debugging)
+      gameDisplay.printGrid(displayGrid); 
 
-      int[] coordinates = playerMoveInput(scan, gridSize);
-      gameboard.revealCoordinate(coordinates, hiddenGrid, displayGrid);
-      gameOver = gameController.isMineAt(hiddenGrid, coordinates); //check if selected coordinate contains a mine
-      gameWon = gameController.checkWin(hiddenGrid, displayGrid);
+      System.out.println("\n--- NEXT MOVE --- ");
+      int[] coordinates = playerMoveInput(scan, gridSize); //takes user command input
+      gameboard.revealCoordinate(coordinates, hiddenGrid, displayGrid); 
+      gameOver = gameStatus.isMineAt(hiddenGrid, coordinates); 
+      gameWon = gameStatus.checkWin(hiddenGrid, displayGrid); 
       gameDisplay.moveResultMessage(gameOver, gameWon); // prints out result of player's move (win/loss/safe)
-      
     }
     
+    //NOTE - END OF GAME 
     //end the game if win/loss condition is met
     if (gameOver || gameWon) {
       //revealAllMines
       System.out.println("Game finished :)");
     }
-    //close scanner
+
     scan.close();
     System.exit(0); 
-
   }
+
+  //NOTE - CLASS METHODS
   
   static int levelSelectInput(Scanner scan) {
-    int levelsAvailable = 4;
-    int selectedLevel = -1;
+    int levelsAvailable = 4; // this could change 
+    int selectedLevel = -1; //default value
     while (selectedLevel == -1){
       selectedLevel = intInput(scan, 1, levelsAvailable);
     }
@@ -102,7 +98,6 @@ public class MineSweeperApp {
     return coordinate;
   }
   
-
   static int intInput(Scanner scan,  int minLimit, int maxLimit) {
     boolean inputIsInt = false;
     boolean inputIsWithinBounds = false;
@@ -111,11 +106,9 @@ public class MineSweeperApp {
     //input validation
     while (!inputIsInt || !inputIsWithinBounds){
       String rawInput = scan.nextLine();
-      // System.out.println("raw: " + rawInput);
       try {
         //is the input a integer?
         int input = Integer.parseInt(rawInput);
-        // System.out.println("input: " +input);
         inputIsInt = true;
         //is the input within bounds?
         inputIsWithinBounds = inputIsWithinBounds(input, minLimit, maxLimit);
@@ -123,7 +116,6 @@ public class MineSweeperApp {
           throw new Exception();
         } else {
           validInput = input;
-          // System.out.println("input: " + validInput);
         }
       } catch (Exception e) {
         if (!inputIsWithinBounds) {
@@ -133,12 +125,10 @@ public class MineSweeperApp {
         }
       }
     }
-    // System.out.println("input: " + validInput);
     return validInput;
   }
 
   public static boolean inputIsWithinBounds (int input, int minLimit, int maxLimit) {
-    // System.out.println(input + ", ("+ minLimit + "-"+ maxLimit  + ")");
     boolean inputValid = false;
     if (input >= minLimit && input <= maxLimit ) {
       inputValid = true;
@@ -148,11 +138,13 @@ public class MineSweeperApp {
     return inputValid;
   }
   
+  //play again prompt -> if yes a new game should start with new values 
+    //can track num of games won vs lost this way too?
   public static String playAgainPrompt(Scanner scan) {
-    //play again prompt -> if yes a new game should start with new values
     System.out.println("Play Again? Enter 'Y'..");
-    String response = scan.nextLine();  //find way to start game again if 'Y' inputted 
-    //if yes resetGame? - create new instance of the MineSweeperApp? //can track num of games won vs lost this way too
+    String response = scan.nextLine();  
+    //find way to start game again if 'Y' inputted 
+      //create new instance of the MineSweeperApp? 
     return response;
   }
 
