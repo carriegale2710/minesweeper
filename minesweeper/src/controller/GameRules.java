@@ -7,7 +7,7 @@
    - Methods like playerMove(GameBoard board), checkWin(GameBoard board)
  
   IT SHOULD NOT:
-  - directly handle any user input/output (view)
+  - directly handle any user input/output (main)
   - directly manage board's internal data structures (model)
   - contain any board setup logic (model)
 
